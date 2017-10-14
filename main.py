@@ -3,7 +3,7 @@
 from ConfigSwitcher import ConfigSwitcher
 
 if __name__ == "__main__":
-    s = Switcher("./path_to_file")
+    s = ConfigSwitcher("./path_to_file")
 
     s.switch()
 
