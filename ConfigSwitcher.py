@@ -17,8 +17,8 @@ class ConfigSwitcher():
         try:
             self.f = fileinput.FileInput(path, inplace=1, backup=".bck")
 
-            regex_front = re.compile(r'^#.*(?=\s#\stype:\sfrontend$)', re.IGNORECASE)
-            regex_back = re.compile(r'^#.*(?=\s#\stype:\sbackend$)', re.IGNORECASE)
+            regex_front = re.compile(r'^\s*#.*(?=#\stype:\sfrontend$)', re.IGNORECASE)
+            regex_back = re.compile(r'^\s*#.*(?=#\stype:\sbackend$)', re.IGNORECASE)
 
             # Индексация файла для определения текущей настройки (backend|frontend)
             with open(path) as file:
@@ -30,7 +30,7 @@ class ConfigSwitcher():
                         self.__TYPE = self.__FRONTEND
                         break
         except IOError:
-            print("File is not exists.\n")
+            print("Файл не найден.")
             exit()
 
     """

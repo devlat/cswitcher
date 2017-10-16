@@ -1,0 +1,23 @@
+# /etc/nginx/sites-available/
+
+server {
+	listen 80;
+	listen [::]:80;
+
+	#root /var/www/baursak/backend/web;
+    root /var/www/julia/backend/web; # type: backend
+#	root /var/www/julia/frontend/web; # type: frontend
+	index index.html index.htm index.php;
+
+	client_max_body_size 32m;
+        server_name test.dev www.test.dev;
+
+	location / {
+		if (!-e $request_filename){
+			rewrite ^(.*)$ /index.php;
+		}
+		try_files $uri $uri/ =404;
+	}
+	
+	include /etc/nginx/templates/php-fpm.conf;
+}
